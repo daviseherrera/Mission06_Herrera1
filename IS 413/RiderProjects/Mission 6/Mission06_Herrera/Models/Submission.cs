@@ -1,29 +1,26 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission06_Herrera.Models;
 
 public class Submission
 {
-    public int SubmissionId { get; set; }
-
-    [Required]  // Ensures Category is required
-    public string Category { get; set; } = string.Empty;
-
-    [Required]  // Ensures Title is required
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Auto-generate the ID
+    public int MovieId { get; set; }
+    [Required(ErrorMessage = "You must select a category.")]
+    [ForeignKey("CategoryId")]
+    public int CategoryId { get; set; }
+    public Category? Category { get; set; }
+    [Required(ErrorMessage = "You need to input a title.")]  // Ensures Title is required
     public string Title { get; set; } = string.Empty;
-
-    [Required]  // Ensures Year is required
+    [Required(ErrorMessage = "You need to inlcude the year")]  // Ensures Year is required
     public int Year { get; set; }
-
-    [Required]  // Ensures Director is required
-    public string Director { get; set; } = string.Empty;
-
+    public string? Director { get; set; } = string.Empty;
     [Required]  // Ensures Rating is required
     public string Rating { get; set; } = string.Empty;
-
     public bool Edited { get; set; }   
-
     public string? LentTo { get; set; }  // Nullable (optional)
-
+    [Required] public string CopiedToPlex { get; set; }
     public string? Notes { get; set; }   // Nullable (optional)
 }

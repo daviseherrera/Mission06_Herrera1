@@ -31,33 +31,83 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult MovieSubmission()
     {
-        return View();
+        ViewBag.Categories = _context.Categories.ToList();
+            
+        return View("MovieSubmission", new Submission());
     }
     
     [HttpPost]
-    public async Task<IActionResult> MovieSubmission(MovieSubmissionContext.Submission response)
+    public IActionResult MovieSubmission(Mission06_Herrera.Models.Submission response)
     {
-        // Ensure LentTo and Notes are stored as NULL instead of empty strings
+        Console.WriteLine($"Received CategoryId: {response.CategoryId}"); // Debugging
+
+        // Ensure LentTo is never NULL
         response.LentTo = string.IsNullOrWhiteSpace(response.LentTo) ? null : response.LentTo;
         response.Notes = string.IsNullOrWhiteSpace(response.Notes) ? null : response.Notes;
 
-        int retryCount = 3; // Number of retries
-        while (retryCount > 0)
+        response.MovieId = 0;
+
+        if (!ModelState.IsValid)
         {
-            try
+            Console.WriteLine("ModelState is invalid.");
+            foreach (var error in ModelState)
             {
-                _context.Submissions.Add(response); // Add record to the database
-                await _context.SaveChangesAsync(); // Use async to avoid blocking
-                return View("Confirmation", response);
+                Console.WriteLine($"Key: {error.Key}, Errors: {string.Join(", ", error.Value.Errors.Select(e => e.ErrorMessage))}");
             }
-            catch (Microsoft.Data.Sqlite.SqliteException ex) when (ex.SqliteErrorCode == 5) // SQLite Error 5: Database is locked
-            {
-                retryCount--;
-                if (retryCount == 0)
-                    throw; // Re-throw the exception if retries are exhausted
-                await Task.Delay(100); // Wait for 100ms before retrying
-            }
+            ViewBag.Categories = _context.Categories.ToList(); // Keep dropdown populated
+            return View(response); // Return the form with validation messages
         }
-        return View("Error"); // Fallback in case of failure
+
+        _context.Movies.Add(response);
+        _context.SaveChanges();
+
+        return View("Confirmation", response);
+    }
+
+    public IActionResult MovieList()
+    {
+        var submissions = _context.Movies
+            .OrderBy(x => x.Title)
+            .ToList();
+
+        return View(submissions);
+    }
+    
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        var recordToEdit = _context.Movies
+            .Single(x => x.MovieId == id);
+        
+        ViewBag.Categories = _context.Categories.ToList();
+        
+        return View("MovieSubmission", recordToEdit);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(Submission updatedInfo)
+    {
+        _context.Update(updatedInfo);
+        _context.SaveChanges();
+        
+        return RedirectToAction("MovieList");
+    }
+
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        var recordToDelete = _context.Movies
+            .Single(x => x.MovieId == id);
+        
+        return View(recordToDelete);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(Submission response)
+    {
+        _context.Movies.Remove(response);
+        _context.SaveChanges();
+
+        return RedirectToAction("MovieList");
     }
 }

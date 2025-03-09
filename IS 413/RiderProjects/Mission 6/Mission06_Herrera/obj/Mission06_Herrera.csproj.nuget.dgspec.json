@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj": {}
+    "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/NEW/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj": {}
   },
   "projects": {
-    "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj": {
+    "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/NEW/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj",
+        "projectUniqueName": "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/NEW/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj",
         "projectName": "Mission06_Herrera",
-        "projectPath": "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj",
+        "projectPath": "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/NEW/IS 413/RiderProjects/Mission 6/Mission06_Herrera/Mission06_Herrera.csproj",
         "packagesPath": "/Users/davisherrera/.nuget/packages/",
-        "outputPath": "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/RiderProjects/Mission 6/Mission06_Herrera/obj/",
+        "outputPath": "/Users/davisherrera/Library/CloudStorage/OneDrive-Personal/Information Systems/IS 413/NEW/IS 413/RiderProjects/Mission 6/Mission06_Herrera/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/davisherrera/.nuget/NuGet/NuGet.Config"
@@ -45,23 +45,23 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[9.0.2, )"
             }
           },
           "imports": [

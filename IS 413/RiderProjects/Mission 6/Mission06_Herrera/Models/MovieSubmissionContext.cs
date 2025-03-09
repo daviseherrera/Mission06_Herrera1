@@ -4,29 +4,25 @@ namespace Mission06_Herrera.Models;
 
 public class MovieSubmissionContext : DbContext
 {
-    public DbSet<Submission> Submissions { get; set; }
+    public DbSet<Submission> Movies { get; set; }
     
     public MovieSubmissionContext(DbContextOptions<MovieSubmissionContext> options) : base(options) // Constructor
     {
     }
+    
+    public DbSet<Category> Categories { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder) // Seeding data
     {
-        // Add the configuration for the Submission entity
-        modelBuilder.Entity<Submission>()
-            .HasKey(s => s.SubmissionId); // Mark the entity's key
-    }
-
-    public class Submission
-    {
-        public int SubmissionId { get; set; }
-        public string Category { get; set; } = String.Empty;
-        public string Title { get; set; } = String.Empty;
-        public int Year { get; set; }
-        public string Director { get; set; } = String.Empty;
-        public string Rating { get; set; } = String.Empty;
-        public bool Edited { get; set; }   
-        public string LentTo { get; set; } = String.Empty;
-        public string Notes { get; set; } = String.Empty;
+        modelBuilder.Entity<Category>().HasData(
+        new Category {CategoryId = 1, CategoryName = "Miscellaneous"},
+        new Category {CategoryId = 2, CategoryName = "Drama"},
+        new Category {CategoryId = 3, CategoryName = "Television"},
+        new Category {CategoryId = 4, CategoryName = "Horror/Suspense"},
+        new Category {CategoryId = 5, CategoryName = "Comedy"},
+        new Category {CategoryId = 6, CategoryName = "Family"},
+        new Category {CategoryId = 7, CategoryName = "Action/Adventure"},
+        new Category {CategoryId = 8, CategoryName = "VHS"});
+            
     }
 }
